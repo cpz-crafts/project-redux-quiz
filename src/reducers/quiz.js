@@ -2,15 +2,19 @@ import { createSlice } from '@reduxjs/toolkit'
 
 // Change these to your own questions!
 const questions = [
-  { id: 1, questionText: 'Who set the Olympic record for the 100m dash in 2012?', options: ['Usain Bolt', 'Justin Gatlin', 'Tyson Gay', 'Asafa Powell'], correctAnswerIndex: 0 },
-  { id: 2, questionText: 'When was Michael Phelps last named male World Swimmer of the Year?', options: ['2012', '2014', '2016', '2018'], correctAnswerIndex: 2 }
+  { id: 1, questionText: 'What does AI stand for?', options: ['Automatic Intelligence', 'Artifical Information', 'Automatic information', 'Artificial intelligence'], correctAnswerIndex: 3 },
+  { id: 2, questionText: 'When was the term AI first used?', options: ['1956', '1943', '2022', '1997'], correctAnswerIndex: 0 },
+  { id: 3, questionText: 'What is the name of Google´s AI Chatbot?', options: ['Barry', 'Bard', 'Bert', 'Burt'], correctAnswerIndex: 1 },
+  { id: 4, questionText: 'Which of the following is an example of AI-technology?', options: ['Deep learning', 'Quick learning', 'Shallow learning', 'Heavy learning'], correctAnswerIndex: 0 },
+  { id: 5, questionText: 'The term "Friendly AI" was introduced by...?', options: ['Steve Jobs', 'Alan Turing', 'Marvin Minsky', 'Eliezer Yudkowsky'], correctAnswerIndex: 3 }
 ]
 
 const initialState = {
   questions,
   answers: [],
   currentQuestionIndex: 0,
-  quizOver: false
+  quizOver: false,
+  selectAnswer: null
 }
 
 export const quiz = createSlice({
@@ -52,6 +56,16 @@ export const quiz = createSlice({
         answer: question.options[answerIndex],
         isCorrect: question.correctAnswerIndex === answerIndex
       })
+    },
+
+    /* add an action for select Answer */
+
+    selectAnswer: (state, action) => {
+      const { questionId, answerIndex } = action.payload;
+      state.selectedAnswer = {
+        questionId,
+        answerIndex
+      };
     },
 
     /**
